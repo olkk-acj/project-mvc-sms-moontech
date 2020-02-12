@@ -18,5 +18,8 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
+    <facet type="NBMindMap" name="NB Mind Map">
+      <configuration />
+    </facet>
   </component>
 </module>
