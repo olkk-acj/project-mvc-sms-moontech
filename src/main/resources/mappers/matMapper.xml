@@ -3,12 +3,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.moontech.sms.mapper.matMapper">
+  <select id = "recentValue">
+    SELECT MAT_SQ FROM tb_mat ORDER BY MAT_SQ DESC LIMIT 1;
+
+  </select>
+
+
   <insert id = "create">
-    INSERT INTO
-        TB_MAT(
-        )
-
-
+    INSERT INTO TB_MAT(
+        MAT_SQ, MAT_NM, MAT_SIZE, PICTURE, STAN_PRICE, WEIGHT)
+    VALUES (#{matSq}, #{matNm}, #{matSize}, #{picture}, #{matPrice}, #{matWeight} )
   </insert>
 
 </mapper>
