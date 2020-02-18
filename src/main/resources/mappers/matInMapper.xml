@@ -11,8 +11,13 @@
 	<insert id = "create">
 		INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
 	</insert>
-	<insert id = "createDe">
-
+	<insert id = "createDe" parametertype="java.util.Map">
+		INSERT INTO
+		    tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ)
+		VALUES
+		<foreach collection = "list" item = "item" separator = " , ">
+			(#{matSq}, #{inAmt}, #{inSq})
+		</foreach>
 	</insert>
 
 	<select id = "read">
@@ -22,6 +27,13 @@
 	<select id = "readDe" resultType="com.moontech.sms.vo.MatInVO">
 		SELECT * FROM tb_mat_in_de WHERE IN_SQ = #{inSq}
 	</select>
+
+	<delete id = "delete">
+		DELETE FROM tb_mat_in WHERE IN_SQ = #{inSq}
+	</delete>
+	<delete id = "deleteDe">
+		DELETE FROM TB_MAT_IN_DE WHERE IN_SQ = #{inSq}
+	</delete>
 
 	<select id = "matListAll">
 		SELECT * FROM tb_mat ORDER BY MAT_SQ DESC
