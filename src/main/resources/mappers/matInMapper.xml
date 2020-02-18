@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moontech.sms.mapper.matInMapper">
+
+	<select id = "nextVal">
+		SELECT IN_SQ FROM tb_mat_in ORDER BY IN_SQ DESC LIMIT 1
+	</select>
+
+	<insert id = "create">
+		INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
+	</insert>
+	<insert id = "createDe">
+
+	</insert>
+
+	<select id = "read">
+		SELECT * FROM tb_mat_in WHERE IN_SQ = #{inSq}
+	</select>
+
+	<select id = "readDe" resultType="com.moontech.sms.vo.MatInVO">
+		SELECT * FROM tb_mat_in_de WHERE IN_SQ = #{inSq}
+	</select>
+
+	<select id = "matListAll">
+		SELECT * FROM tb_mat ORDER BY MAT_SQ DESC
+	</select>
+
+</mapper>
+
