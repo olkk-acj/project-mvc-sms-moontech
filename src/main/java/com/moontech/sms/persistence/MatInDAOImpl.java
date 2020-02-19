@@ -14,18 +14,18 @@ public class MatInDAOImpl implements MatInDAO{
 	private static String namespace = "com.moontech.sms.mapper.matInMapper";
 
 	@Override
-	public int nextValMatInSq() throws Exception {
-
+	public int nextVal() throws Exception {
+		return session.selectOne(namespace + ".nextVal");
 	}
 
 	@Override
-	public int create(MatInVO mVo) throws Exception {
-		return 0;
+	public void create(MatInVO mVo) throws Exception {
+		session.insert(namespace + ".create");
 	}
 
 	@Override
-	public int createDe(MatInVO mVo) throws Exception {
-		return 0;
+	public void createDe(List<MatInVO> list) throws Exception {
+		session.insert(namespace + ".createDe", list);
 	}
 
 	@Override

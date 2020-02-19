@@ -4,23 +4,21 @@
 
 <mapper namespace="com.moontech.sms.mapper.matInMapper">
 
-	<select id = "nextVal">
+	<select id = "nextVal" resultType="int">
 		SELECT IN_SQ FROM tb_mat_in ORDER BY IN_SQ DESC LIMIT 1
 	</select>
 
 	<insert id = "create">
 		INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
 	</insert>
-	<insert id = "createDe" parametertype="java.util.Map">
-		INSERT INTO
-		    tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ)
-		VALUES
-		<foreach collection = "list" item = "item" separator = " , ">
-			(#{matSq}, #{inAmt}, #{inSq})
+	<insert id = "createDe" >
+		INSERT INTO	tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES
+		<foreach collection = "list" item = "item">
+			(#{item.matSq}, #{item.inAmt}, #{item.inSq})
 		</foreach>
 	</insert>
 
-	<select id = "read">
+	<select id = "read" resultType="com.moontech.sms.vo.MatInVO">
 		SELECT * FROM tb_mat_in WHERE IN_SQ = #{inSq}
 	</select>
 

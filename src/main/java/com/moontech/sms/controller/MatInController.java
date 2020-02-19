@@ -29,10 +29,10 @@ public class MatInController {
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public void writeGET(Model model) throws Exception {
 		logger.info("Move writePage ========");
+		int inSq = service.nextVal();
+		System.out.println(inSq);
 
-		int inSq = service.nextValMatInSq();
-
-
+		model.addAttribute("inSq", service.nextVal());
 
 	}
 }
