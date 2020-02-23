@@ -14,5 +14,7 @@ public class MatInVO {
 	private int deSq;
 	private int matSq;
 	private String matNm;
+	private int stockAmt;
 	private int inAmt;
+	private int outAmt;
 }

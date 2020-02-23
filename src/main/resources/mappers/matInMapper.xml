@@ -4,24 +4,34 @@
 
 <mapper namespace="com.moontech.sms.mapper.matInMapper">
 
-	<select id = "nextVal">
+	<select id = "nextVal" resultType="int">
 		SELECT IN_SQ FROM tb_mat_in ORDER BY IN_SQ DESC LIMIT 1
 	</select>
 
 	<insert id = "create">
 		INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
 	</insert>
-	<insert id = "createDe">
-
+	<insert id = "createDe" >
+		INSERT INTO	tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES (#{item.matSq}, #{item.inAmt}, #{item.inSq})
+	</insert>
+	<insert id = "updateStock">
+		INSERT INTO tb_mat_stock(MAT_SQ, STOCK_AMT, IN_AMT) VALUES (${atSq}, ${stockAmt}, ${inAmt})
 	</insert>
 
-	<select id = "read">
+	<select id = "read" resultType="com.moontech.sms.vo.MatInVO">
 		SELECT * FROM tb_mat_in WHERE IN_SQ = #{inSq}
 	</select>
 
 	<select id = "readDe" resultType="com.moontech.sms.vo.MatInVO">
 		SELECT * FROM tb_mat_in_de WHERE IN_SQ = #{inSq}
 	</select>
+
+	<delete id = "delete">
+		DELETE FROM tb_mat_in WHERE IN_SQ = #{inSq}
+	</delete>
+	<delete id = "deleteDe">
+		DELETE FROM TB_MAT_IN_DE WHERE IN_SQ = #{inSq}
+	</delete>
 
 	<select id = "matListAll">
 		SELECT * FROM tb_mat ORDER BY MAT_SQ DESC

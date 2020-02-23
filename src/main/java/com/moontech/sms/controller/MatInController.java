@@ -1,6 +1,9 @@
 package com.moontech.sms.controller;
 
 import com.moontech.sms.service.MatInService;
+import com.moontech.sms.vo.MatInVO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author AhnChanJin
@@ -24,16 +29,36 @@ public class MatInController {
 	@Inject
 	private MatInService service;
 
-
+// 목록 조회한다. list로 만든다. foreach로 다시 조회한다. list로 만다 보낸다.
 	// Move WritePage
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public void writeGET(Model model) throws Exception {
 		logger.info("Move writePage ========");
+		model.addAttribute("inSq", service.nextVal());
+		model.addAttribute("list", service.stock());
+		System.out.println(service.stock().toString());
+		logger.info("End /write");
+	}
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	public String writePost(@RequestParam("inSq") int inSq, @RequestParam("empNo") int empNo, @RequestParam("purSq") int purSq, @RequestParam(value = "inList") List<Integer> inList, MatInVO vo, RedirectAttributes rttr) throws Exception{
+		logger.info("writePost  ========");
+		List<MatInVO> list = new ArrayList<MatInVO>();
 
-		int inSq = service.nextValMatInSq();
+		vo.setInSq(inSq);
+		vo.setEmpNo(empNo);
+		vo.setPurSq(purSq);
+		for (int i = 0; i < inList.size(); i++){
+			MatInVO ivo = new MatInVO();
+		inList.get(1);
 
-
-
+			ivo.setMatSq(inList.get(i));
+			ivo.setStockAmt(i);
+			ivo.setInAmt(i);
+			list.add(ivo);
+		}
+		service.write(vo, list);
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		return "redirect:/matIn/list";
 	}
 }
 	/*

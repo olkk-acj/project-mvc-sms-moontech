@@ -1,0 +1,77 @@
+SELECT * FROM tb_mat_in;
+
+ALTER TABLE TB_PART
+    ADD PRIMARY KEY (PART_SQ);
+
+
+SELECT  TABLE_NAME, COLUMN_NAME, ORDINAL_POSITION,
+        DATA_TYPE, IS_NULLABLE
+FROM    INFORMATION_SCHEMA.COLUMNS
+WHERE   TABLE_SCHEMA = 'SMS'
+ORDER BY TABLE_NAME, ORDINAL_POSITION;
+
+-- TB_MAT
+    -- SELECT ALL
+    SELECT * FROM TB_MAT;
+
+    -- INSERT DATA
+    INSERT INTO TB_MAT(MAT_SQ, MAT_NM, MAT_SIZE, PICTURE, STAN_PRICE, WEIGHT) VALUES (79, 'testNm', 4, 4, 4, 4);
+    -- DELETE
+    DELETE FROM tb_mat WHERE MAT_SQ = 3;
+-- TB_MAT_STOCK
+    -- SELECT ALL
+    SELECT * FROM tb_mat_stock;
+
+    -- INSERT DATA Mat Stock
+    INSERT INTO tb_mat_stock(MAT_SQ, STOCK_AMT, IN_AMT) VALUES (79, 6, 2);
+--  INSERT INTO tb_mat_stock(MAT_SQ, STOCK_AMT, IN_AMT) VALUES (${atSq}, ${stockAmt}, ${inAmt})
+
+    -- MatSq List
+    SELECT DISTINCT MAT_SQ FROM tb_mat ORDER BY MAT_SQ;
+
+    -- MatStock List
+    SELECT  M.MAT_SQ, M.MAT_NM, S.STOCK_AMT FROM tb_mat_stock S, tb_mat M WHERE M.MAT_SQ = 3 AND S.MAT_SQ = M.MAT_SQ ORDER BY S.STOCK_SQ DESC LIMIT 1;
+--  SELECT  M.MAT_SQ, M.MAT_NM, S.STOCK_AMT FROM tb_mat_stock S, tb_mat M WHERE M.MAT_SQ = #{matSq} AND S.MAT_SQ = M.MAT_SQ ORDER BY S.STOCK_SQ DESC LIMIT 1
+
+    SELECT  S.STOCK_SQ, M.MAT_SQ, M.MAT_NM, S.STOCK_AMT FROM tb_mat_stock S, tb_mat M WHERE S.MAT_SQ = M.MAT_SQ ORDER BY S.STOCK_SQ DESC LIMIT 1;
+
+
+    SELECT * FROM (SELECT * FROM TB_MAT_STOCK ORDER BY ROWNUM DESC) A, TB_MAT B WHERE A.MAT_SQ = ? AND A.MAT_SQ = B.MAT_SQ AND ROWNUM =1
+
+-- TB_MAT_IN
+    -- SELECT ALL
+    SELECT * FROM tb_mat_in;
+    SELECT * FROM tb_mat_in_de;
+
+    -- SELECT ALL MAT
+    SELECT * FROM tb_mat ORDER BY MAT_SQ DESC ;
+
+    -- nextvalMatInSq
+    SELECT IN_SQ FROM tb_mat_in ORDER BY IN_SQ DESC LIMIT 1;
+
+    -- INSERT TB_MAT_IN_DE
+    INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(3, 1, 1);
+    --  INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
+
+    -- createDe TB_MAT_IN_DE
+    INSERT INTO tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES(1, 1, 2);
+    --  INSERT INTO tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES(#{matSq}, #{inAmt}, #{inSq})
+
+    -- READ TB_MAT_IN
+    SELECT * FROM tb_mat_in WHERE IN_SQ = 1;
+    --  SELECT * FROM tb_mat_in WHERE IN_SQ = #{inSq}
+
+    -- readDe TB_MAT_IN_DE
+    SELECT * FROM tb_mat_in_de WHERE IN_SQ = 2;
+    --  SELECT * FROM tb_mat_in_de WHERE IN_SQ = #{inSq}
+
+    -- delete TB_MAT_IN
+    DELETE FROM tb_mat_in WHERE IN_SQ = 1;
+    --  DELETE FROM tb_mat_in WHERE IN_SQ = #{inSq}
+
+    -- delete TB_MAT_IN_DE
+    DELETE FROM tb_mat_in_de WHERE IN_SQ = 1;
+    --  DELETE FROM TB_MAT_IN_DE WHERE IN_SQ = #{inSq}
+
+SELECT DISTINCT MAT_SQ FROM (SELECT * FROM TB_MAT_STOCK ORDER BY STOCK_SQ DESC);
+
