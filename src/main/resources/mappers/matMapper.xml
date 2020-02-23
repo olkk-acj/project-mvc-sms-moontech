@@ -8,6 +8,15 @@
 
   </select>
 
+  <select id = "matSqList" resultType="com.moontech.sms.vo.MatVO">
+    SELECT DISTINCT MAT_SQ FROM tb_mat ORDER BY MAT_SQ
+  </select>
+
+  <select id = "matStockList" resultType="com.moontech.sms.vo.MatVO">
+    SELECT  M.MAT_SQ, M.MAT_NM, S.STOCK_AMT FROM tb_mat_stock S, tb_mat M WHERE M.MAT_SQ = #{matSq} AND S.MAT_SQ = M.MAT_SQ ORDER BY S.STOCK_SQ DESC LIMIT 1
+  </select>
+
+<!-- CREATE 할때 STOCK에도 추가하고 DELETE할때는 STOCK에서도 삭제할 것 -->
 
   <insert id = "create">
     INSERT INTO TB_MAT(

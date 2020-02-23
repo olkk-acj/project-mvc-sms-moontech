@@ -12,10 +12,10 @@
 		INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
 	</insert>
 	<insert id = "createDe" >
-		INSERT INTO	tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES
-		<foreach collection = "list" item = "item">
-			(#{item.matSq}, #{item.inAmt}, #{item.inSq})
-		</foreach>
+		INSERT INTO	tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES (#{item.matSq}, #{item.inAmt}, #{item.inSq})
+	</insert>
+	<insert id = "updateStock">
+		INSERT INTO tb_mat_stock(MAT_SQ, STOCK_AMT, IN_AMT) VALUES (${atSq}, ${stockAmt}, ${inAmt})
 	</insert>
 
 	<select id = "read" resultType="com.moontech.sms.vo.MatInVO">

@@ -24,8 +24,13 @@ public class MatInDAOImpl implements MatInDAO{
 	}
 
 	@Override
-	public void createDe(List<MatInVO> list) throws Exception {
-		session.insert(namespace + ".createDe", list);
+	public void createDe(MatInVO vo) throws Exception {
+		session.insert(namespace + ".createDe", vo);
+	}
+
+	@Override
+	public void updateStock(MatInVO vo) throws Exception {
+		session.insert(namespace + ".updateStock", vo);
 	}
 
 	@Override
