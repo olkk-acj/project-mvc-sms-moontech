@@ -16,7 +16,9 @@
     ---<hr>
     <form role="form" method="post" action="/matIn/write">
         <!-- hidden value for summit -->
-        <input type="hidden" name="inList" id="inList">
+        <input type="hidden" name="matSqList" id="matSqList">
+        <input type="hidden" name="stockAmtList" id="stockAmtList">
+        <input type="hidden" name="inAmtList" id="inAmtList">
         <!--
         <input type="hidden" name="empNo" value="${empNo}">
         <input type="hidden" name="inSq" value="${inSq}">
@@ -122,9 +124,8 @@
                                         <tbody>
                                         <c:forEach items="${list}" var="mat">
                                             <tr>
-                                                <td><input type="checkbox" name="check"
-                                                           value="${mat.matSq}"></td>
-                                                <th scope="row">${mat.matNm}</th>
+                                                <td><input type="checkbox" name="check" value="${mat.matSq}"></td>
+                                                <td>${mat.matNm}</td>
                                                 <td>${mat.stockAmt}</td>
                                             </tr>
                                         </c:forEach>
@@ -193,38 +194,25 @@
   $("#add").click(function() {
     var checkbox = $("input[name=check]:checked");
     checkbox.each(function() {
-
       var tr = $(this).parent().parent();
-
       var td = tr.children();
-
       var matSq = $(this).val();
-
-
-
-      var picture = td.eq(1).text();
-      var matNm = td.eq(2).text();
-      var stockAmt = td.eq(3).text();
-      var row = "<tr>"
-          + "<td>"
-          + "<input type=\"checkbox\" class=\"checkBox2\" name=\"check2\" value=\"" + matSq + "\"" + ">"
-          + "</td>" + "<td class=\"picture\">" + picture
-          + "</td>" + "<td class=\"matNm\">" + matNm
-          + "</td>" + "<td class=\"stockAmt\">" + stockAmt
-          + "</td>" + "<td><input type=\"text\" class=\"inAmt\" value=\"0\"></td>" +
+      var matNm = td.eq(1).text();
+      var stockAmt = td.eq(2).text();
+      var row =
+          "<tr>" +
+            "<td>" + "<input type=\"checkbox\" class=\"checkBox2\" name=\"check2\" value=\"" + matSq + "\"" + ">" + "</td>" +
+            "<td class=\"matNm\">" + matNm + "</td>" +
+            "<td>" + stockAmt + "</td>" +
+            "<td>" + "<input type=\"text\" class=\"inAmt\" name=\"inAmt\" value=\"0\"></td>" +
+            "<td>" + "<input type=\"hidden\" class=\"stockAmt\" value=\"" + stockAmt + "\"" + ">" + "</td>" +
           "</tr>";
-      // 숨긴 값의 체크박스를 false 상태로 바꿈
+      // 숨긴 값의 체크박스를 false 상태로 바꿈"
       $(this).prop("checked", false);
       tr.remove();
-
       $("#attList > tbody").append(row);
-
       $("#allCheck1").prop("checked", false);
-
-
     })
-
-
   });
 
   //삭제
@@ -269,17 +257,23 @@
   $(document).ready(function(){
     var formObj = $("form[role='form']");
     $("#btn-submit").on("click", function(){
-      var send_array = Array();
-      var send_cnt = 0;
+      var array_matSq = Array();
+      var array_stockAmt = Array();
+      var array_inAmt = Array();
+
       var chkbox = $(".checkBox2");
+      var stockAmt = $(".stockAmt");
       var inAmt = $(".inAmt");
 
       for(i=0; i<chkbox.length; i++) {
-        send_array[i] = chkbox[i].value;
-        send_array[i] = inAmt[i].value;
-        i++;
+        array_matSq[i] = chkbox[i].value;
+        array_stockAmt[i] = stockAmt[i].value;
+        array_inAmt[i] = inAmt[i].value;
       }
-      $("#inList").val(send_array);
+
+      $("#matSqList").val(array_matSq);
+      $("#stockAmtList").val(array_stockAmt);
+      $("#inAmtList").val(array_inAmt);
       formObj.submit();
     });
   });

@@ -11,13 +11,18 @@
 	<insert id = "create">
 		INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
 	</insert>
-	<insert id = "createDe" >
-		INSERT INTO	tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES (#{item.matSq}, #{item.inAmt}, #{item.inSq})
+	<insert id = "createDe" parameterType="java.util.List">
+		INSERT INTO tb_mat_in_de(MAT_SQ, IN_AMT, IN_SQ) VALUES
+		<foreach collection = "list" item = "item" separator=",">
+			("${item.matSq}", "${item.inAmt}", "${item.inSq}")
+		</foreach>
 	</insert>
-	<insert id = "updateStock">
-		INSERT INTO tb_mat_stock(MAT_SQ, STOCK_AMT, IN_AMT) VALUES (${atSq}, ${stockAmt}, ${inAmt})
+	<insert id = "updateStock" parameterType="java.util.List">
+		INSERT INTO tb_mat_stock(MAT_SQ, STOCK_AMT, IN_AMT) VALUES
+    	<foreach collection = "list" item = "item" separator=",">
+		    ("${item.matSq}", "${item.stockAmt}", "${item.inAmt}")
+	    </foreach>
 	</insert>
-
 	<select id = "read" resultType="com.moontech.sms.vo.MatInVO">
 		SELECT * FROM tb_mat_in WHERE IN_SQ = #{inSq}
 	</select>

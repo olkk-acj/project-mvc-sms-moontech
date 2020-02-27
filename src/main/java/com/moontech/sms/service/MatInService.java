@@ -18,6 +18,7 @@ public interface MatInService {
 
 	//등록
 	public void write(MatInVO vo, List<MatInVO> list)throws Exception;
+	public void writeDe(MatInVO vo)throws Exception;
 
 	// 상세보기
 	public MatInVO read(int inSq) throws  Exception;

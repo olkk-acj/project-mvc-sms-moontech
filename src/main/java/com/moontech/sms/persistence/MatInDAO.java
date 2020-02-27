@@ -7,9 +7,9 @@ public interface MatInDAO {
 	// Latest PK
 	public int nextVal()throws Exception;
 	//등록
-	public void create(MatInVO Vo) throws Exception;
-	public void createDe(MatInVO vo) throws Exception;
-	public void updateStock(MatInVO vo) throws Exception;
+	public void create(MatInVO vo) throws Exception;
+	public void createDe(List<MatInVO> list) throws Exception;
+	public void updateStock(List<MatInVO> list) throws Exception;
 	//읽기
 	public MatInVO read(int inSq) throws Exception;
 	public List<MatInVO> readDe(int inSq) throws Exception;

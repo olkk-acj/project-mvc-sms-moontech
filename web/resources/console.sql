@@ -50,7 +50,7 @@ ORDER BY TABLE_NAME, ORDINAL_POSITION;
     SELECT IN_SQ FROM tb_mat_in ORDER BY IN_SQ DESC LIMIT 1;
 
     -- INSERT TB_MAT_IN_DE
-    INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(3, 1, 1);
+    INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(4, 1, 1);
     --  INSERT INTO tb_mat_in(IN_SQ, EMP_NO, PUR_SQ) VALUES(#{inSq}, #{empNo}, #{purSq})
 
     -- createDe TB_MAT_IN_DE

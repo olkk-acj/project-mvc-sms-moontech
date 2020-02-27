@@ -37,14 +37,10 @@ public class MatInServiceImpl implements MatInService {
 	@Override
 	public void write(MatInVO vo, List<MatInVO> list) throws Exception {
 		dao.create(vo);
-
-		for(MatInVO voList : list){
-			int stockAmt = voList.getStockAmt() - voList.getInAmt();
-			voList.setStockAmt(stockAmt);
-
-			dao.createDe(voList);
-			dao.updateStock(voList);
-		}
+		dao.createDe(list);
+		dao.updateStock(list);
+	}
+	public void writeDe(MatInVO vo) throws Exception{
 	}
 
 	@Override
