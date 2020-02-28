@@ -1,6 +1,6 @@
 package com.moontech.sms.service;
 
-import com.moontech.sms.dao.MatDAO;
+import com.moontech.sms.persistence.MatDAO;
 import com.moontech.sms.persistence.MatInDAO;
 import com.moontech.sms.vo.MatInVO;
 import com.moontech.sms.vo.MatVO;

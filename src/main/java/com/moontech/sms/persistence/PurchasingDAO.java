@@ -1,4 +1,4 @@
-package com.moontech.sms.dao;
+package com.moontech.sms.persistence;
 
 import java.util.List;
 

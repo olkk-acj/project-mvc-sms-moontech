@@ -1,6 +1,6 @@
 package com.moontech.sms.service;
 
-import com.moontech.sms.dao.MatDAO;
+import com.moontech.sms.persistence.MatDAO;
 import com.moontech.sms.vo.MatVO;
 import java.util.List;
 import javax.inject.Inject;
