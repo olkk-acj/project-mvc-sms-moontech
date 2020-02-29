@@ -30,7 +30,7 @@ public class PurchasingController {
 	public void popupGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws  Exception{
 		logger.info(cri.toString());
 
-		model.addAttribute("list", service.)
+		model.addAttribute("list", service.popUpList());
 
 	}
 
